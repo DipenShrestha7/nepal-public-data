@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+@theme {
+  /* This overrides the default utility variables for font-sans in Tailwind v4 */
+  --font-sans: "Inter", sans-serif;
+}
