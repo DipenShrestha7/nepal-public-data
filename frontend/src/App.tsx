@@ -11,7 +11,7 @@ function App() {
     <Router>
       <div className="flex flex-col min-h-screen">
         <Header />
-        <main className="grow">
+        <main className="grow pt-10">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/dataset" element={<Dataset />} />
