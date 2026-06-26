@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   Search,
   Filter,
@@ -9,6 +10,7 @@ import {
   Tag,
   ExternalLink,
 } from "lucide-react";
+import Datasets from "../data/Datasets.ts";
 
 export default function Dataset() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -23,54 +25,7 @@ export default function Dataset() {
     "Infrastructure",
   ];
 
-  const datasets = [
-    {
-      title: "National Population & Housing Census Trends",
-      desc: "Comprehensive demographic distributions, growth rates, and household structures broken down by province, district, and local levels.",
-      category: "Population",
-      updated: "March 2026",
-      size: "4.2 MB",
-      format: "CSV / JSON",
-      records: "77 Districts",
-    },
-    {
-      title: "Macroeconomic Indicators & Annual GDP Metrics",
-      desc: "Historical records of Nepal's gross domestic product, inflation rates, consumer price indices, and fiscal trade balances.",
-      category: "Economy",
-      updated: "May 2026",
-      size: "1.8 MB",
-      format: "CSV / XLSX",
-      records: "15 Years Trend",
-    },
-    {
-      title: "Public Health Infrastructure & Facility Mapping",
-      desc: "Geospatial listings, bed capacities, and resource metrics for public hospitals, primary health centers, and health posts across Nepal.",
-      category: "Health",
-      updated: "January 2026",
-      size: "2.5 MB",
-      format: "CSV / GeoJSON",
-      records: "1,420 Facilities",
-    },
-    {
-      title: "Annual Cash Crop Production & Land Yields",
-      desc: "Agricultural database detailing production volumes, land utilization patterns, and yield ratios for major crops across ecological zones.",
-      category: "Agriculture",
-      updated: "June 2026",
-      size: "3.1 MB",
-      format: "CSV",
-      records: "7 Provinces",
-    },
-    {
-      title: "Strategic Road Network & Hydroelectric Projects",
-      desc: "Status trackers, structural lengths, and capacity metrics for national highways, feeder roads, and active electricity generation plants.",
-      category: "Infrastructure",
-      updated: "April 2026",
-      size: "5.7 MB",
-      format: "JSON / XLSX",
-      records: "89 Projects",
-    },
-  ];
-
+  const datasets = Datasets;
   const filteredDatasets = datasets.filter((data) => {
     const matchesSearch =
       data.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -141,9 +96,25 @@ export default function Dataset() {
                     </span>
                   </div>
 
-                  <h2 className="text-xl font-bold text-slate-900 tracking-tight hover:text-blue-600 transition-colors cursor-pointer">
-                    {dataset.title}
-                  </h2>
+                  <h3 className="text-xl font-bold mt-3 text-gray-900 hover:text-blue-600 hover:underline transition-colors">
+                    {dataset.title ===
+                    "National Mortality Registry & Cause of Death Summary" ? (
+                      <Link
+                        to="/mortalityperprovince-districts"
+                        state={{
+                          dataUrl: "/data/mortality_clean.json",
+                          title: dataset.title,
+                        }}
+                      >
+                        {dataset.title}
+                      </Link>
+                    ) : (
+                      // Fallback default for your other dataset cards
+                      <span className="cursor-not-allowed">
+                        {dataset.title}
+                      </span>
+                    )}
+                  </h3>
 
                   <p className="text-slate-600 text-sm leading-relaxed max-w-3xl">
                     {dataset.desc}

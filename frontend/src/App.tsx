@@ -5,6 +5,7 @@ import Home from "./assets/pages/Home";
 import Dataset from "./assets/pages/Dataset";
 import Visualization from "./assets/pages/Visualization";
 import About from "./assets/pages/About";
+import MortalityTableViewer from "./assets/components/Dataset Details/MortalityPerProvince-Districts";
 
 function App() {
   return (
@@ -17,6 +18,10 @@ function App() {
             <Route path="/dataset" element={<Dataset />} />
             <Route path="/visualizations" element={<Visualization />} />
             <Route path="/about" element={<About />} />
+            <Route
+              path="/mortalityperprovince-districts"
+              element={<MortalityTableViewer />}
+            />
           </Routes>
         </main>
         <Footer />
